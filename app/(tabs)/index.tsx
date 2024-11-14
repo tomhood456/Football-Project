@@ -1,74 +1,157 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+const data1 = [
+  { id: '1', title: 'Premier League' },
+  { id: '2', title: 'Championship' },
+  { id: '3', title: 'League 1' },
+  { id: '4', title: 'League 2' },
+];
 
-export default function HomeScreen() {
+const data2 = [
+  { id: '1', name: 'Arsenal' },
+  { id: '2', name: 'Aston Villa' },
+  { id: '3', name: 'Bournemouth' },
+  { id: '4', name: 'Brentford' },
+  { id: '5', name: 'Brighton & Hove Albion' },
+  { id: '6', name: 'Chelsea' },
+  { id: '7', name: 'Crystal Palace' },
+  { id: '8', name: 'Everton' },
+  { id: '9', name: 'Fulham' },
+  { id: '10', name: 'Ipswich Town' },
+  { id: '11', name: 'Leicester City' },
+  { id: '12', name: 'Liverpool' },
+  { id: '13', name: 'Manchester City' },
+  { id: '14', name: 'Manchester United' },
+  { id: '15', name: 'Newcastle United' },
+  { id: '16', name: 'Nottingham Forest' },
+  { id: '17', name: 'Southampton' },
+  { id: '18', name: 'Tottenham Hotspur' },
+  { id: '19', name: 'West Ham United' },
+  { id: '20', name: 'Wolverhampton Wanderers' },
+];
+
+
+export default function Profile() {
+  const [showList, setShowList] = useState(false);
+
+  const handleClick = (title: any) => {
+    if (title === 'Premier League') {
+      setShowList(true); 
+    } else {
+      Alert.alert(`You clicked on ${title}. This list is not available.`);
+    }
+  };
+
+  const goBack = () => {
+    setShowList(false);
+  };
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <View style={styles.imageBox}>
+        <Text style={styles.headerText}> *** Insert Table / Images ***</Text>
+      </View>
+      <View style={styles.headerBox}>
+        <View style={styles.headerTextContainer}>
+          <Text style={styles.statsText}>32/92 | 35%</Text>
+          <Text style={styles.statsText}> *** Insert Pie Chart ***</Text>
+          <Text style={styles.headerText}>Stadiums Visited</Text>
+        </View>
+      </View>
+      <View style={styles.listContainer}>
+        {!showList ? (
+          <FlatList
+            data={data1}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.listItem}
+                onPress={() => handleClick(item.title)}
+              >
+                <Text style={styles.listItemText}>{item.title}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        ) : (
+          <FlatList
+            data={data2}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity 
+                style={styles.listItem}
+                onPress={goBack}
+              >
+                <Text style={styles.listItemText}>{item.name}</Text>
+              </TouchableOpacity>
+            )}
+          />
+        )}
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
+    backgroundColor: '#E8EAED',
+    paddingTop: 50,
+    paddingHorizontal: 20,
+  },
+  headerBox: {
+    width: '100%',
+    height: 100,
+    padding: 20,
+    backgroundColor: '#FFF',
+    borderRadius: 12,
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
+    marginBottom: 30,
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  imageBox: {
+    width: '100%',
+    height: 200,
+    padding: 20,
+    backgroundColor: '#FFF',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 30,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  headerText: {
+    alignContent: 'center',
+    alignItems: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  statsText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  listContainer: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginBottom: 20,
+  },
+  listItem: {
+    padding: 16,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginVertical: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  headerTextContainer: {
+    alignItems: 'center',
+  },
+  listItemText: {
+    fontSize: 18,
+    color: '#333',
   },
 });

@@ -1,45 +1,38 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+// import { Tabs } from 'expo-router';
+// import React from 'react';
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+// const TabLayout = () => {
+//   return(
+//     <Tabs />  
+//   )
+// }
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+// export default TabLayout;
 
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+import { Stack, Tabs } from 'expo-router'
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import TabBar from '@/components/TabBar'
+
+const _layout = () => {
+    return (
+        <View style={styles.container}>
+          <Tabs tabBar={props => <TabBar {...props} /> }>
+          <Tabs.Screen name='index' options={{ title: 'Home',  /* headerShown: false, */ }}/>
+          <Tabs.Screen name='explore' options={{ title: 'Map' ,  /* headerShown: false, */}}/>
+          <Tabs.Screen name='profile' options={{ title: 'Profile',   /* headerShown: false, */ }}/>
+        </Tabs>
+      </View>
+    )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#E8EAED',
+      padding: 0,   
+      margin: 0, 
+    },
+  });
+
+export default _layout
