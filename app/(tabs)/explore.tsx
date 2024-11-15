@@ -1,23 +1,7 @@
-// import { Tabs } from 'expo-router';
-// import React from 'react';
-// import { View, Text } from 'react-native'
-
-// const Page = () => {
-//   return(
-//     <View>
-//       <Text>Explore</Text>
-//     </View>
-//   )
-// }
-
-// export default Page;
-
 import React, { useState } from 'react'
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps'
 import { View, Text, StyleSheet, TouchableOpacity, Keyboard, Alert } from 'react-native'
 import { markers } from '@/assets/markers';
-
-
 
 const INITIAL_REGION= {
     latitude: 52.3555,

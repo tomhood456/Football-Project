@@ -1,14 +1,3 @@
-// import { Tabs } from 'expo-router';
-// import React from 'react';
-
-// const TabLayout = () => {
-//   return(
-//     <Tabs />  
-//   )
-// }
-
-// export default TabLayout;
-
 import { Stack, Tabs } from 'expo-router'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
