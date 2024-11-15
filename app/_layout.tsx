@@ -1,7 +1,8 @@
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import { Alert, Button } from 'react-native';
 import 'react-native-reanimated';
 
 SplashScreen.preventAutoHideAsync();
@@ -24,6 +25,17 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="AllTeams" options={{ headerTitle: 'Add Team' }} />
+      <Stack.Screen name="PremTeams" options={{ 
+        headerTitle: 'My Teams',
+        headerBackTitle: 'Back',
+        headerRight: () => (
+          <Button
+            onPress={() => router.push('/AllTeams')}
+            title="+"
+          />
+        )
+      }} />
     </Stack>
   );
 }
