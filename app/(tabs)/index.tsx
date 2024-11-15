@@ -1,50 +1,23 @@
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 
 const data1 = [
-  { id: '1', title: 'Premier League' },
-  { id: '2', title: 'Championship' },
-  { id: '3', title: 'League 1' },
-  { id: '4', title: 'League 2' },
-];
-
-const data2 = [
-  { id: '1', name: 'Arsenal' },
-  { id: '2', name: 'Aston Villa' },
-  { id: '3', name: 'Bournemouth' },
-  { id: '4', name: 'Brentford' },
-  { id: '5', name: 'Brighton & Hove Albion' },
-  { id: '6', name: 'Chelsea' },
-  { id: '7', name: 'Crystal Palace' },
-  { id: '8', name: 'Everton' },
-  { id: '9', name: 'Fulham' },
-  { id: '10', name: 'Ipswich Town' },
-  { id: '11', name: 'Leicester City' },
-  { id: '12', name: 'Liverpool' },
-  { id: '13', name: 'Manchester City' },
-  { id: '14', name: 'Manchester United' },
-  { id: '15', name: 'Newcastle United' },
-  { id: '16', name: 'Nottingham Forest' },
-  { id: '17', name: 'Southampton' },
-  { id: '18', name: 'Tottenham Hotspur' },
-  { id: '19', name: 'West Ham United' },
-  { id: '20', name: 'Wolverhampton Wanderers' },
+  { id: '1', title: 'My Teams' },
+  // { id: '2', title: 'Championship' },
+  // { id: '3', title: 'League 1' },
+  // { id: '4', title: 'League 2' },
 ];
 
 
 export default function Profile() {
-  const [showList, setShowList] = useState(false);
 
   const handleClick = (title: any) => {
-    if (title === 'Premier League') {
-      setShowList(true); 
+    if (title === 'My Teams') {
+      router.push('/PremTeams'); 
     } else {
       Alert.alert(`You clicked on ${title}. This list is not available.`);
     }
-  };
-
-  const goBack = () => {
-    setShowList(false);
   };
 
   return (
@@ -60,33 +33,19 @@ export default function Profile() {
         </View>
       </View>
       <View style={styles.listContainer}>
-        {!showList ? (
-          <FlatList
-            data={data1}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.listItem}
-                onPress={() => handleClick(item.title)}
-              >
-                <Text style={styles.listItemText}>{item.title}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        ) : (
-          <FlatList
-            data={data2}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity 
-                style={styles.listItem}
-                onPress={goBack}
-              >
-                <Text style={styles.listItemText}>{item.name}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        )}
+        <FlatList
+          data={data1}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.listItem}
+              onPress={() => handleClick(item.title)}
+            >
+              <Text style={styles.listItemText}>{item.title}</Text>
+            </TouchableOpacity>
+          )}
+        />
+
       </View>
     </View>
   );
