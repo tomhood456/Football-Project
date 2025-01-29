@@ -2,11 +2,8 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 
-const data1 = [
+const HomepageListData = [
   { id: '1', title: 'My Teams' },
-  // { id: '2', title: 'Championship' },
-  // { id: '3', title: 'League 1' },
-  // { id: '4', title: 'League 2' },
 ];
 
 
@@ -34,7 +31,7 @@ export default function Profile() {
       </View>
       <View style={styles.listContainer}>
         <FlatList
-          data={data1}
+          data={HomepageListData}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <TouchableOpacity
